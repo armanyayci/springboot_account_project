@@ -3,6 +3,7 @@ package com.project1.account.Entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Transaction")
@@ -16,6 +17,6 @@ public class Transaction {
     @Column(name = "transaction_amount")
     private int amount;
     @Column(name = "transaction_date")
-    private String transaction_date;
+    private LocalDateTime transaction_date;
 
 }

@@ -3,6 +3,7 @@ package com.project1.account.Entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -18,6 +19,9 @@ public class Account {
     private int balance;
 
     @Column(name = "acc_creation_date")
-    private String creation_date;
+    private LocalDateTime creation_date;
+
+
+
 
 }
