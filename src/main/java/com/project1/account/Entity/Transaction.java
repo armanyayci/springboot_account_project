@@ -19,4 +19,22 @@ public class Transaction {
     @Column(name = "transaction_date")
     private LocalDateTime transaction_date;
 
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            optional = false
+    )
+    @JoinColumn(
+            name = "Account_ID",
+            foreignKey = @ForeignKey(
+                    name = "FK_Account_ID",
+                    value = ConstraintMode.CONSTRAINT
+            )
+    )
+    private Account account;
+
+
+
+
+
 }
