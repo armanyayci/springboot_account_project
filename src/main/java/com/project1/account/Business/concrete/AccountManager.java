@@ -2,7 +2,6 @@ package com.project1.account.Business.concrete;
 
 import com.project1.account.Business.abstracts.AccountService;
 import com.project1.account.DTO.Account.AccountViewDTO;
-import com.project1.account.DTO.Account.BalanceAccountDTO;
 import com.project1.account.DTO.Account.CreateAccountDTO;
 import com.project1.account.Entity.Account;
 import com.project1.account.Entity.Customer;
@@ -53,16 +52,6 @@ public class AccountManager implements AccountService {
                 stream().map(AccountViewDTO::AccountConverter).collect(Collectors.toList());
 
     }
-
-    @Override
-    public AccountViewDTO updateBalance(int id, BalanceAccountDTO balanceAccountDTO) {
-
-        Account account = accountRepository.findById(id).orElseThrow(
-                ()-> new NotFoundException("Invalid Account ID"));
-        account.setBalance(balanceAccountDTO.getBalance());
-        return AccountViewDTO.AccountConverter(account);
-    }
-
 }
 
 

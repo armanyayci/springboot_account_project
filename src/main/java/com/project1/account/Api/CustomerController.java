@@ -1,4 +1,4 @@
-package com.project1.account.Controller;
+package com.project1.account.Api;
 
 import com.project1.account.Business.abstracts.CustomerService;
 import com.project1.account.DTO.Customer.CreateCustomerDTO;
@@ -20,10 +20,9 @@ public class CustomerController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<?> createCustomer(@RequestBody CreateCustomerDTO createCustomerDTO){
+    public ResponseEntity<CustomerViewDTO> createCustomer(@RequestBody CreateCustomerDTO createCustomerDTO){
 
-        customerService.createCustomer(createCustomerDTO);
-        return ResponseEntity.ok(createCustomerDTO);
+        return ResponseEntity.ok(customerService.createCustomer(createCustomerDTO));
     }
 
     @GetMapping("get/{id}")

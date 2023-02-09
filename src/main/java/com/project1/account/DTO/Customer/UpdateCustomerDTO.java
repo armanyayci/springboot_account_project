@@ -4,6 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class UpdateCustomerDTO {
-
     private String password;
 }

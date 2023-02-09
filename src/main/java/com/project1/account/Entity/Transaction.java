@@ -1,6 +1,7 @@
 package com.project1.account.Entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,17 +9,18 @@ import java.util.Date;
 @Entity
 @Table(name = "Transaction")
 @Data
+@NoArgsConstructor
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "transaction_amount")
+    @Column(name = "amount")
     private int amount;
-    @Column(name = "transaction_date")
+    @Column(name = "date")
     @Temporal(TemporalType.DATE)
-    private Date transaction_date;
+    private Date date;
 
     @ManyToOne(
             fetch = FetchType.LAZY,
@@ -33,8 +35,9 @@ public class Transaction {
     )
     private Account account;
 
-
-
-
-
+    public Transaction(int amount, Date date, Account account) {
+        this.amount = amount;
+        this.date = date;
+        this.account = account;
+    }
 }

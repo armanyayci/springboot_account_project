@@ -1,11 +1,6 @@
 package com.project1.account.DTO.Account;
 
-import com.project1.account.Entity.Customer;
 import lombok.Data;
-import lombok.Getter;
-
-import java.util.Date;
-
 @Data
 public class CreateAccountDTO {
     private int balance;
