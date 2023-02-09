@@ -28,8 +28,7 @@ public class Transaction {
     @JoinColumn(
             name = "Account_ID",
             foreignKey = @ForeignKey(
-                    name = "FK_Account_ID",
-                    value = ConstraintMode.CONSTRAINT
+                    name = "FK_Account_ID"
             )
     )
     private Account account;

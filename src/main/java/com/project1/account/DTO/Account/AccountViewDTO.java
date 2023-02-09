@@ -1,4 +1,4 @@
-package com.project1.account.DTO;
+package com.project1.account.DTO.Account;
 
 
 
@@ -8,7 +8,6 @@ import lombok.Getter;
 
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter

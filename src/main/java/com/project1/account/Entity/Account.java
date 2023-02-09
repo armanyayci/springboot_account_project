@@ -30,8 +30,7 @@ public class Account {
     @JoinColumn(
             name = "Customer_id",
             foreignKey = @ForeignKey(
-                    name = "FK_Customer_ID",
-                    value = ConstraintMode.CONSTRAINT
+                    name = "FK_Customer_ID"
             )
     )
     @ManyToOne(

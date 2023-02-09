@@ -1,4 +1,4 @@
-package com.project1.account.DTO;
+package com.project1.account.DTO.Customer;
 
 import lombok.Data;
 

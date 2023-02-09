@@ -1,9 +1,9 @@
 package com.project1.account.Business.concrete;
 
 import com.project1.account.Business.abstracts.AccountService;
-import com.project1.account.DTO.AccountViewDTO;
-import com.project1.account.DTO.CreateAccountDTO;
-import com.project1.account.DTO.CreateCustomerDTO;
+import com.project1.account.DTO.Account.AccountViewDTO;
+import com.project1.account.DTO.Account.BalanceAccountDTO;
+import com.project1.account.DTO.Account.CreateAccountDTO;
 import com.project1.account.Entity.Account;
 import com.project1.account.Entity.Customer;
 import com.project1.account.Exception.NotFoundException;
@@ -12,6 +12,8 @@ import com.project1.account.Repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountManager implements AccountService {
@@ -41,6 +43,23 @@ public class AccountManager implements AccountService {
         Account account = accountRepository.save(new Account(
                 createAccountDTO.getBalance(),date,customer
         ));
+        return AccountViewDTO.AccountConverter(account);
+    }
+
+    @Override
+    public List<AccountViewDTO> listAccount() {
+
+        return accountRepository.findAll().
+                stream().map(AccountViewDTO::AccountConverter).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public AccountViewDTO updateBalance(int id, BalanceAccountDTO balanceAccountDTO) {
+
+        Account account = accountRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException("Invalid Account ID"));
+        account.setBalance(balanceAccountDTO.getBalance());
         return AccountViewDTO.AccountConverter(account);
     }
 
