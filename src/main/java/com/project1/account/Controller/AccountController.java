@@ -2,11 +2,9 @@ package com.project1.account.Controller;
 
 import com.project1.account.Business.abstracts.AccountService;
 import com.project1.account.DTO.AccountViewDTO;
+import com.project1.account.DTO.CreateAccountDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/account")
@@ -18,11 +16,23 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/get-account/{id}")
-    public ResponseEntity<AccountViewDTO> account(@PathVariable int id){
+    @GetMapping("get/{id}")
+    public ResponseEntity<AccountViewDTO> getAccount(@PathVariable int id){
 
         AccountViewDTO account = accountService.getAccountById(id);
         return ResponseEntity.ok(account);
     }
+
+    @PostMapping("post")
+    public ResponseEntity<AccountViewDTO> createAccount(@RequestBody CreateAccountDTO createAccountDTO){
+
+        AccountViewDTO account = accountService.createAccount(createAccountDTO);
+        return ResponseEntity.ok(account);
+    }
+
+
+
+
+
 
 }

@@ -3,7 +3,7 @@ package com.project1.account.Entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "Transaction")
@@ -17,7 +17,8 @@ public class Transaction {
     @Column(name = "transaction_amount")
     private int amount;
     @Column(name = "transaction_date")
-    private LocalDateTime transaction_date;
+    @Temporal(TemporalType.DATE)
+    private Date transaction_date;
 
     @ManyToOne(
             fetch = FetchType.LAZY,

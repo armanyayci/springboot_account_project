@@ -2,17 +2,25 @@ package com.project1.account.Business.concrete;
 
 import com.project1.account.Business.abstracts.AccountService;
 import com.project1.account.DTO.AccountViewDTO;
+import com.project1.account.DTO.CreateAccountDTO;
+import com.project1.account.DTO.CreateCustomerDTO;
 import com.project1.account.Entity.Account;
+import com.project1.account.Entity.Customer;
 import com.project1.account.Exception.NotFoundException;
 import com.project1.account.Repository.AccountRepository;
+import com.project1.account.Repository.CustomerRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class AccountManager implements AccountService {
 
-    private AccountRepository accountRepository;
-    public AccountManager(AccountRepository accountRepository) {
+    private final AccountRepository accountRepository;
+    private final CustomerRepository customerRepository;
+    public AccountManager(AccountRepository accountRepository,CustomerRepository customerRepository) {
         this.accountRepository = accountRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -23,10 +31,18 @@ public class AccountManager implements AccountService {
         return AccountViewDTO.AccountConverter(account);
     }
 
+    @Override
+    public AccountViewDTO createAccount(CreateAccountDTO createAccountDTO) {
 
+        Date date = new Date();
+        Customer customer = customerRepository.findById(createAccountDTO.getCustomer_id()).
+                orElseThrow(()-> new NotFoundException("Invalid CustomerID") );
 
-
-
+        Account account = accountRepository.save(new Account(
+                createAccountDTO.getBalance(),date,customer
+        ));
+        return AccountViewDTO.AccountConverter(account);
+    }
 
 }
 

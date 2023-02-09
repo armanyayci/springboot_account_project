@@ -1,27 +1,29 @@
 package com.project1.account.Entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "Customer")
 public class Customer {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "customer_name")
-    private String c_name;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "customer_surname")
-    private String c_surname;
-
+    @Column(name = "surname")
+    private String surname;
+    @Column(name = "password")
+    private String password;
 
     @OneToMany(
             fetch = FetchType.LAZY,
@@ -29,10 +31,13 @@ public class Customer {
             mappedBy = "customer",
             targetEntity = Account.class
     )
-    private Set Account = new HashSet();
-    // private List<Account> accounts;
+    //private Set Account = new HashSet();
+    private List<Account> accounts;
 
 
-
-
+    public Customer(String name, String surname, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.password=password;
+    }
 }

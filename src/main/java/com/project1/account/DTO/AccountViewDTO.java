@@ -3,26 +3,31 @@ package com.project1.account.DTO;
 
 
 import com.project1.account.Entity.Account;
+import com.project1.account.Entity.Customer;
 import lombok.Getter;
 
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
-public class AccountViewDTO {
+public class AccountViewDTO implements Serializable {
 
-    private final int balance;
-    private final LocalDateTime creation_date;
+    private int balance;
+    private Date creation_date;
+    private String customer;
 
-    private AccountViewDTO(int balance, LocalDateTime creation_date)
+    private AccountViewDTO(int balance, Date creation_date, Customer customer)
     {
         this.balance = balance;
         this.creation_date = creation_date;
+        this.customer= customer.getName() + " " + customer.getSurname();
     }
 
     public static AccountViewDTO AccountConverter(Account account)
     {
-        return new AccountViewDTO(account.getBalance(),account.getCreation_date());
+        return new AccountViewDTO(account.getBalance(),account.getCreation_date(),account.getCustomer());
     }
 
 
